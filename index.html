@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>MED BASHA PRO_v 1.4.31</title>
+    <title>MED BASHA PRO v1.4.31</title>
     
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -22,32 +22,69 @@
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
     
     <style>
-        [x-cloak] { display: none !important; }
+        [x-cloak] { 
+            display: none !important; 
+        }
         
         @keyframes amber-pulse {
-            0%, 100% { background-color: rgba(245, 158, 11, 0.6); box-shadow: 0 0 10px rgba(245, 158, 11, 0.4); }
-            50% { background-color: rgba(245, 158, 11, 1); box-shadow: 0 0 20px rgba(245, 158, 11, 0.8); }
+            0%, 100% { 
+                background-color: rgba(245, 158, 11, 0.6); 
+                box-shadow: 0 0 10px rgba(245, 158, 11, 0.4); 
+            }
+            50% { 
+                background-color: rgba(245, 158, 11, 1); 
+                box-shadow: 0 0 20px rgba(245, 158, 11, 0.8); 
+            }
+        }
+        
+        .animate-amber { 
+            animation: amber-pulse 1.5s infinite; 
+            color: white !important; 
+            border: 1px solid rgba(255,255,255,0.3); 
+        }
+        
+        .theme-dark { 
+            background-color: #0f172a; 
+            color: #f8fafc; 
+        }
+        
+        .theme-dark .glass-card { 
+            background: rgba(30, 41, 59, 0.75); 
+            backdrop-filter: blur(12px); 
+            border: 1px solid rgba(255,255,255,0.12); 
+        }
+        
+        .theme-ceniza { 
+            background-color: #374151; 
+            color: #f3f4f6; 
+        }
+        
+        .theme-ceniza .glass-card { 
+            background: rgba(31, 41, 55, 0.88); 
+            backdrop-filter: blur(12px); 
+            border: 1px solid rgba(255,255,255,0.18); 
+        }
+        
+        .theme-pizarra { 
+            background-color: #1e293b; 
+            color: #f8fafc; 
+        }
+        
+        .theme-pizarra .glass-card { 
+            background: rgba(15, 23, 42, 0.88); 
+            backdrop-filter: blur(12px); 
+            border: 1px solid rgba(255,255,255,0.15); 
         }
 
-        @keyframes mic-listening {
-            0%, 100% { border-color: #3b82f6; box-shadow: 0 0 8px rgba(59, 130, 246, 0.6); }
-            50% { border-color: #ef4444; box-shadow: 0 0 16px rgba(239, 68, 68, 0.9); }
+        body { 
+            font-family: system-ui, sans-serif; 
+            transition: background-color 0.4s ease, font-size 0.2s ease; 
+            overflow-x: hidden; 
         }
         
-        .animate-amber { animation: amber-pulse 1.5s infinite; color: white !important; border: 1px solid rgba(255,255,255,0.3); }
-        .listening-field { animation: mic-listening 1s infinite; }
-        
-        .theme-dark { background-color: #0f172a; color: #f8fafc; }
-        .theme-dark .glass-card { background: rgba(30, 41, 59, 0.75); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.12); }
-        
-        .theme-ceniza { background-color: #374151; color: #f3f4f6; }
-        .theme-ceniza .glass-card { background: rgba(31, 41, 55, 0.88); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.18); }
-        
-        .theme-pizarra { background-color: #1e293b; color: #f8fafc; }
-        .theme-pizarra .glass-card { background: rgba(15, 23, 42, 0.88); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.15); }
-
-        body { font-family: system-ui, sans-serif; transition: background-color 0.4s ease, font-size 0.2s ease; overflow-x: hidden; }
-        input[type="time"]::-webkit-calendar-picker-indicator { filter: invert(1); }
+        input[type="time"]::-webkit-calendar-picker-indicator { 
+            filter: invert(1); 
+        }
         
         .input-dark { 
             background: rgba(0,0,0,0.5); 
@@ -61,16 +98,56 @@
             transition: border-color 0.2s ease;
         }
         
-        .input-dark:focus { border-color: #3b82f6; }
-        input[type="time"].input-dark { font-size: 1.6rem !important; font-weight: 900; }
-        input[type="text"].input-dark { font-size: 1.3rem !important; font-weight: 800; color: #fbbf24; }
-        input[type="number"].input-dark { font-size: 1.4rem !important; font-weight: 900; color: #22d3ee; }
+        .input-dark:focus { 
+            border-color: #3b82f6; 
+        }
+        
+        input[type="time"].input-dark { 
+            font-size: 1.6rem !important; 
+            font-weight: 900; 
+        }
+        
+        input[type="text"].input-dark { 
+            font-size: 1.3rem !important; 
+            font-weight: 800; 
+            color: #fbbf24; 
+        }
+        
+        input[type="number"].input-dark { 
+            font-size: 1.4rem !important; 
+            font-weight: 900; 
+            color: #22d3ee; 
+        }
 
-        .lcd-clock { font-family: 'Courier New', Courier, monospace; letter-spacing: 2px; }
-        .color-dot { width: 32px; height: 32px; border-radius: 50%; border: 2px solid transparent; transition: transform 0.2s; }
-        .color-dot.active { border-color: white; transform: scale(1.1); }
-        .semana-header { background: linear-gradient(90deg, rgba(59, 130, 246, 0.2), transparent); border-left: 4px solid #3b82f6; }
-        .firma-footer { font-family: 'Georgia', serif; font-style: italic; letter-spacing: 1px; opacity: 0.5; }
+        .lcd-clock { 
+            font-family: 'Courier New', Courier, monospace; 
+            letter-spacing: 2px; 
+        }
+        
+        .color-dot { 
+            width: 32px; 
+            height: 32px; 
+            border-radius: 50%; 
+            border: 2px solid transparent; 
+            transition: transform 0.2s; 
+        }
+        
+        .color-dot.active { 
+            border-color: white; 
+            transform: scale(1.1); 
+        }
+        
+        .semana-header { 
+            background: linear-gradient(90deg, rgba(59, 130, 246, 0.2), transparent); 
+            border-left: 4px solid #3b82f6; 
+        }
+        
+        .firma-footer { 
+            font-family: 'Georgia', serif; 
+            font-style: italic; 
+            letter-spacing: 1px; 
+            opacity: 0.5; 
+        }
     </style>
 </head>
 <body :class="getTemaClass()" :style="'font-size: ' + settings.fontSize + 'px;'">
@@ -110,8 +187,8 @@
             <div class="space-y-3 text-xs text-slate-300 leading-relaxed max-h-80 overflow-y-auto pr-1">
                 <p>👋 <strong>¡Bienvenido a MED BASHA PRO!</strong> Tu gestor profesional de registro de jornada de autobuses.</p>
                 <div class="p-3 bg-slate-800/80 rounded-2xl border border-white/5 space-y-2">
-                    <p class="font-bold text-white text-[11px]">🎙️ Dictado por Voz Campo a Campo:</p>
-                    <p class="text-[10px]">Toca el micrófono en Bus Mañana o Tarde. Dicta el Bus, Hora Entrada, Hora Salida y KM Inicio. Los KM Fin se quedan libres para rellenar al terminar tu turno.</p>
+                    <p class="font-bold text-white text-[11px]">🚌 Registro Ágil de Jornadas:</p>
+                    <p class="text-[10px]">Introduce el número de bus, las horas de entrada/salida y kilómetros de inicio y fin. Las dietas y horas extras se calculan automáticamente.</p>
                 </div>
                 <div class="p-3 bg-slate-800/80 rounded-2xl border border-white/5 space-y-2">
                     <p class="font-bold text-white text-[11px]">⚡ Sincronización Multidispositivo:</p>
@@ -231,10 +308,7 @@
             </button>
             <p class="text-[9px] text-slate-400 italic">Puedes activar la sincronización con Google más adelante desde Ajustes.</p>
         </div>
-        <div class="mt-6 flex items-center justify-center gap-1.5 opacity-60">
-            <svg class="w-3.5 h-3.5 text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
-            <span class="firma-footer text-[10px] text-slate-500">medbasha</span>
-        </div>
+        <span class="firma-footer text-[10px] text-slate-600 mt-6 block">medbasha professional suite</span>
     </div>
 
     <!-- PANTALLA 1: INICIO (CALENDARIO) -->
@@ -256,10 +330,7 @@
                 <button @click="modalTutorial = true; actualizarIconos()" class="p-2 bg-slate-800 text-blue-400 rounded-full active:scale-90 transition" title="Instrucciones">
                     <i data-lucide="help-circle" class="w-5 h-5"></i>
                 </button>
-                <div class="flex items-center gap-1 opacity-60">
-                    <svg class="w-3 h-3 text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
-                    <span class="firma-footer text-xs" x-text="'medbasha ' + version"></span>
-                </div>
+                <span class="firma-footer text-xs" x-text="'medbasha ' + version"></span>
                 <button @click="screen = 4; calcularTotales(); actualizarIconos()" class="p-2 bg-slate-800 rounded-full active:scale-90 transition-transform">
                     <i data-lucide="settings"></i>
                 </button>
@@ -282,8 +353,8 @@
             <div class="grid grid-cols-7 gap-1 text-center">
                 <template x-for="day in daysInMonth">
                     <button @click="day.num ? seleccionarDia(day.num) : null" 
-                             class="h-10 flex flex-col items-center justify-center rounded-xl relative transition-all active:scale-90" 
-                             :class="day.isToday ? 'bg-blue-600 font-bold shadow-lg shadow-blue-900/50' : (day.num ? 'hover:bg-white/5' : '')">
+                         class="h-10 flex flex-col items-center justify-center rounded-xl relative transition-all active:scale-90" 
+                         :class="day.isToday ? 'bg-blue-600 font-bold shadow-lg shadow-blue-900/50' : (day.num ? 'hover:bg-white/5' : '')">
                         <span x-text="day.num"></span>
                         <div class="flex gap-0.5 mt-0.5" x-show="tieneRegistro(day.num)">
                             <div :class="obtenerTipoRegistro(day.num) === 'partida' ? 'bg-orange-500' : 'bg-blue-400'" class="w-1.5 h-1.5 rounded-full"></div>
@@ -329,7 +400,7 @@
          class="p-4 max-w-md mx-auto pb-44">
         
         <header class="flex items-center gap-4 mb-6">
-            <button @click="comprobarSalidaPreventiva()" class="p-2 bg-slate-800 rounded-full active:scale-90 transition">
+            <button @click="volverAlInicio()" class="p-2 bg-slate-800 rounded-full active:scale-90 transition">
                 <i data-lucide="arrow-left"></i>
             </button>
             <div class="flex-1">
@@ -348,38 +419,28 @@
             <div class="glass-card p-4 rounded-3xl border border-blue-500/60 transition-all duration-300">
                 <div class="flex justify-between items-center mb-3">
                     <span class="text-[10px] font-black text-blue-400 uppercase">Bus Mañana</span>
-                    <div class="flex items-center gap-2">
-                        <button @click="toggleDictadoVoz(1)" 
-                                class="p-2 rounded-xl border transition-all active:scale-90 flex items-center justify-center"
-                                :class="dictado.activo && dictado.tramoActual === 1 ? 'bg-red-600 text-white border-red-400 animate-pulse' : 'bg-slate-800 text-blue-400 border-blue-500/40'">
-                            <i data-lucide="mic" class="w-4 h-4"></i>
-                        </button>
-                        <input type="text" 
-                               id="bus1-field"
-                               x-model="form.bus1" 
-                               @input="guardarBorrador()" 
-                               placeholder="BUS 1" 
-                               autocapitalize="characters" 
-                               autocomplete="off" 
-                               autocorrect="off" 
-                               spellcheck="false" 
-                               class="w-24 input-dark uppercase"
-                               :class="dictado.activo && dictado.campoActual === 'bus1' ? 'listening-field' : ''">
-                    </div>
+                    <input type="text" 
+                           id="bus1-field"
+                           x-model="form.bus1" 
+                           @input="guardarBorrador()" 
+                           placeholder="BUS 1" 
+                           autocapitalize="characters" 
+                           autocomplete="off" 
+                           autocorrect="off" 
+                           spellcheck="false" 
+                           class="w-28 input-dark uppercase">
                 </div>
                 <div class="grid grid-cols-2 gap-2 mb-3">
                     <input type="time" 
                            id="hE1-field"
                            x-model="form.hE1" 
                            @change="calcular(); guardarBorrador()" 
-                           class="input-dark"
-                           :class="dictado.activo && dictado.campoActual === 'hE1' ? 'listening-field' : ''">
+                           class="input-dark">
                     <input type="time" 
                            id="hS1-field"
                            x-model="form.hS1" 
                            @change="calcular(); guardarBorrador()" 
-                           class="input-dark"
-                           :class="dictado.activo && dictado.campoActual === 'hS1' ? 'listening-field' : ''">
+                           class="input-dark">
                 </div>
                 <div class="grid grid-cols-2 gap-2">
                     <input type="number" 
@@ -388,23 +449,14 @@
                            x-model="form.kmI1" 
                            @input="calcular(); guardarBorrador()" 
                            placeholder="KM Ini" 
-                           class="input-dark"
-                           :class="dictado.activo && dictado.campoActual === 'kmI1' ? 'listening-field' : ''">
-                    <div class="relative flex items-center">
-                        <input type="number" 
-                               id="kmF1-field"
-                               step="1" 
-                               x-model="form.kmF1" 
-                               @input="calcular(); guardarBorrador()" 
-                               placeholder="KM Fin" 
-                               class="input-dark pr-8"
-                               :class="dictado.activo && dictado.campoActual === 'kmF1' ? 'listening-field' : ''">
-                        <button @click="dictarKmFinEspecifico(1)" 
-                                class="absolute right-2 p-1 text-slate-400 hover:text-blue-400 active:scale-75 transition"
-                                title="Dictar solo KM Fin T1">
-                            <i data-lucide="mic" class="w-3.5 h-3.5"></i>
-                        </button>
-                    </div>
+                           class="input-dark">
+                    <input type="number" 
+                           id="kmF1-field"
+                           step="1" 
+                           x-model="form.kmF1" 
+                           @input="calcular(); guardarBorrador()" 
+                           placeholder="KM Fin" 
+                           class="input-dark">
                 </div>
                 <div class="flex justify-center mt-3">
                     <button @click="forzarGuardadoBorrador()" 
@@ -422,38 +474,28 @@
                  class="glass-card p-4 rounded-3xl border border-orange-500/60">
                 <div class="flex justify-between items-center mb-3">
                     <span class="text-[10px] font-black text-orange-400 uppercase">Bus Tarde</span>
-                    <div class="flex items-center gap-2">
-                        <button @click="toggleDictadoVoz(2)" 
-                                class="p-2 rounded-xl border transition-all active:scale-90 flex items-center justify-center"
-                                :class="dictado.activo && dictado.tramoActual === 2 ? 'bg-red-600 text-white border-red-400 animate-pulse' : 'bg-slate-800 text-orange-400 border-orange-500/40'">
-                            <i data-lucide="mic" class="w-4 h-4"></i>
-                        </button>
-                        <input type="text" 
-                               id="bus2-field"
-                               x-model="form.bus2" 
-                               @input="guardarBorrador()" 
-                               placeholder="BUS 2" 
-                               autocapitalize="characters" 
-                               autocomplete="off" 
-                               autocorrect="off" 
-                               spellcheck="false" 
-                               class="w-24 input-dark uppercase"
-                               :class="dictado.activo && dictado.campoActual === 'bus2' ? 'listening-field' : ''">
-                    </div>
+                    <input type="text" 
+                           id="bus2-field"
+                           x-model="form.bus2" 
+                           @input="guardarBorrador()" 
+                           placeholder="BUS 2" 
+                           autocapitalize="characters" 
+                           autocomplete="off" 
+                           autocorrect="off" 
+                           spellcheck="false" 
+                           class="w-28 input-dark uppercase">
                 </div>
                 <div class="grid grid-cols-2 gap-2 mb-3">
                     <input type="time" 
                            id="hE2-field"
                            x-model="form.hE2" 
                            @change="calcular(); guardarBorrador()" 
-                           class="input-dark"
-                           :class="dictado.activo && dictado.campoActual === 'hE2' ? 'listening-field' : ''">
+                           class="input-dark">
                     <input type="time" 
                            id="hS2-field"
                            x-model="form.hS2" 
                            @change="calcular(); guardarBorrador()" 
-                           class="input-dark"
-                           :class="dictado.activo && dictado.campoActual === 'hS2' ? 'listening-field' : ''">
+                           class="input-dark">
                 </div>
                 <div class="grid grid-cols-2 gap-2">
                     <input type="number" 
@@ -462,32 +504,15 @@
                            x-model="form.kmI2" 
                            @input="calcular(); guardarBorrador()" 
                            placeholder="KM Ini" 
-                           class="input-dark"
-                           :class="dictado.activo && dictado.campoActual === 'kmI2' ? 'listening-field' : ''">
-                    <div class="relative flex items-center">
-                        <input type="number" 
-                               id="kmF2-field"
-                               step="1" 
-                               x-model="form.kmF2" 
-                               @input="calcular(); guardarBorrador()" 
-                               placeholder="KM Fin" 
-                               class="input-dark pr-8"
-                               :class="dictado.activo && dictado.campoActual === 'kmF2' ? 'listening-field' : ''">
-                        <button @click="dictarKmFinEspecifico(2)" 
-                                class="absolute right-2 p-1 text-slate-400 hover:text-orange-400 active:scale-75 transition"
-                                title="Dictar solo KM Fin T2">
-                            <i data-lucide="mic" class="w-3.5 h-3.5"></i>
-                        </button>
-                    </div>
+                           class="input-dark">
+                    <input type="number" 
+                           id="kmF2-field"
+                           step="1" 
+                           x-model="form.kmF2" 
+                           @input="calcular(); guardarBorrador()" 
+                           placeholder="KM Fin" 
+                           class="input-dark">
                 </div>
-            </div>
-
-            <!-- INDICADOR ESTADO DE DICTADO -->
-            <div x-show="dictado.activo" class="p-2.5 bg-blue-950/60 border border-blue-500/40 rounded-2xl text-center">
-                <span class="text-[10px] font-black uppercase text-blue-300 tracking-wider flex items-center justify-center gap-2">
-                    <span class="w-2 h-2 rounded-full bg-red-500 animate-ping"></span>
-                    <span x-text="'Escuchando ' + dictado.nombreCampo + '... Diga el valor claramente'"></span>
-                </span>
             </div>
 
             <div class="grid grid-cols-3 gap-2 mt-6">
@@ -551,10 +576,7 @@
         <div class="mb-4">
             <div class="bg-blue-600 text-[11px] font-black text-white px-4 py-2 rounded-t-2xl flex justify-between items-center">
                 <span x-text="'Mes Natural: 01 al 31 de ' + monthNames[currentMonth]"></span>
-                <div class="flex items-center gap-1 opacity-60">
-                    <svg class="w-3 h-3 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
-                    <span class="firma-footer text-[10px]">medbasha</span>
-                </div>
+                <span class="firma-footer text-[10px]">medbasha</span>
             </div>
             <div class="glass-card p-4 rounded-b-2xl border-t-2 border-blue-600 shadow-2xl">
                 <div class="grid grid-cols-3 gap-4 mb-4 border-b border-white/10 pb-4">
@@ -934,7 +956,7 @@
 
         function appBus() {
             return {
-                version: 'MED BASHA PRO_v 1.4.31',
+                version: 'v1.4.31',
                 screen: 1, 
                 userId: '',
                 userEmail: '',
@@ -950,7 +972,7 @@
                 palette:['#707070', '#3b82f6', '#f59e0b', '#10b981', '#ef4444'], 
                 
                 settings: { fontSize: 16, colorMaestro: '#707070', bgModo: '#0f172a' },
-                form: { id: null, esPartida: false, bus1: '', hE1: '', hS1: '', kmI1: '', kmF1: '', bus2: '', hE2: '', hS2: '', kmI2: '', kmF2: '', comida: false, cena: false, festivo: false },
+                form: { id: null, esPartida: false, bus1: '', hE1: '', hS1: '', kmI1: '', kmF1: '', bus2: '', hE2: '', hS2: '', kmI2: '', kmF2: '', comida: false, cena: false, festivo: false, manualComida: false, manualCena: false },
                 res: { hTotal: '06:00', kmTotal: 0 },
                 
                 mostrarPrecios: false,
@@ -979,14 +1001,6 @@
                 errorKm: false,
                 toast: { visible: false, msg: '', isError: false },
                 firebaseIniciado: false,
-
-                dictado: {
-                    activo: false,
-                    tramoActual: 1,
-                    campoActual: '',
-                    nombreCampo: '',
-                    recognition: null
-                },
 
                 getTemaClass() {
                     if (this.settings.bgModo === '#374151') return 'theme-ceniza';
@@ -1046,23 +1060,15 @@
                     });
 
                     if (esSincronizadoEnNube) {
-                        firebase.auth().getRedirectResult()
-                            .then((result) => {
-                                if (result.user) {
-                                    this.userId = result.user.uid;
-                                    this.userEmail = result.user.email || '';
-                                    this.screen = 1;
-                                    this.firebaseIniciado = true;
-                                    this.iniciarSyncAutomatico();
-                                    this.subirRegistrosLocalesPendientes();
-                                    this.notificar("¡Sincronizado con Google!");
-                                }
-                            })
-                            .catch((e) => {
-                                if (e.code !== 'auth/popup-closed-by-user') {
-                                    console.error("Error redirect result:", e);
-                                }
-                            });
+                        firebase.auth().getRedirectResult().then(result => {
+                            if (result.user) {
+                                this.userId = result.user.uid;
+                                this.userEmail = result.user.email || '';
+                                this.firebaseIniciado = true;
+                                this.iniciarSyncAutomatico();
+                                this.subirRegistrosLocalesPendientes();
+                            }
+                        }).catch(e => console.error("Error al procesar redirect de Google:", e));
 
                         firebase.auth().onAuthStateChanged((user) => {
                             if (user) {
@@ -1111,175 +1117,6 @@
                     this.actualizarIconos();
                 },
 
-                palabraANumero(texto) {
-                    if (!texto) return '';
-                    let t = texto.toLowerCase().trim();
-                    
-                    const mapaNumeros = {
-                        'cero': '0', 'uno': '1', 'dos': '2', 'tres': '3', 'cuatro': '4',
-                        'cinco': '5', 'seis': '6', 'siete': '7', 'ocho': '8', 'nueve': '9',
-                        'diez': '10', 'once': '11', 'doce': '12', 'trece': '13', 'catorce': '14',
-                        'quince': '15', 'dieciséis': '16', 'diecisiete': '17', 'dieciocho': '18', 'diecinueve': '19',
-                        'veinte': '20', 'veintiuno': '21', 'veintidós': '22', 'veintitrés': '23', 'veinticuatro': '24',
-                        'treinta': '30', 'cuarenta': '40', 'cincuenta': '50', 'sesenta': '60',
-                        'setenta': '70', 'ochenta': '80', 'noventa': '90', 'cien': '100'
-                    };
-
-                    if (mapaNumeros[t]) {
-                        return mapaNumeros[t];
-                    }
-
-                    for (let word in mapaNumeros) {
-                        if (t.includes(word)) {
-                            t = t.replace(new RegExp(word, 'g'), mapaNumeros[word]);
-                        }
-                    }
-
-                    return t;
-                },
-
-                toggleDictadoVoz(tramo = 1) {
-                    if (this.dictado.activo) {
-                        this.detenerDictado();
-                    } else {
-                        this.iniciarFlujoDictado(tramo);
-                    }
-                },
-
-                dictarKmFinEspecifico(tramo = 1) {
-                    this.detenerDictado();
-                    const campoTarget = tramo === 1 ? 'kmF1' : 'kmF2';
-                    const nombreTarget = tramo === 1 ? 'Kilómetros Fin T1' : 'Kilómetros Fin T2';
-                    this.iniciarEscuchaIndividual(campoTarget, nombreTarget, tramo);
-                },
-
-                iniciarFlujoDictado(tramo = 1) {
-                    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-                    if (!SpeechRecognition) {
-                        return this.notificar("El dictado por voz no es compatible con este navegador", true);
-                    }
-
-                    this.dictado.tramoActual = tramo;
-                    const primerCampo = tramo === 1 ? 'bus1' : 'bus2';
-                    const primerNombre = tramo === 1 ? 'Número de BUS 1' : 'Número de BUS 2';
-
-                    this.iniciarEscuchaIndividual(primerCampo, primerNombre, tramo);
-                },
-
-                iniciarEscuchaIndividual(campo, nombreCampo, tramo) {
-                    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-                    if (!SpeechRecognition) return;
-
-                    if (this.dictado.recognition) {
-                        try { this.dictado.recognition.stop(); } catch(e){}
-                    }
-
-                    const rec = new SpeechRecognition();
-                    rec.lang = 'es-ES';
-                    rec.continuous = false;
-                    rec.interimResults = false;
-
-                    this.dictado.activo = true;
-                    this.dictado.campoActual = campo;
-                    this.dictado.nombreCampo = nombreCampo;
-                    this.dictado.tramoActual = tramo;
-                    this.dictado.recognition = rec;
-
-                    this.$nextTick(() => {
-                        const el = document.getElementById(`${campo}-field`);
-                        if (el) el.focus();
-                    });
-
-                    rec.onresult = (event) => {
-                        const texto = event.results[0][0].transcript.trim();
-                        this.procesarTextoDictado(texto, campo, tramo);
-                    };
-
-                    rec.onerror = (err) => {
-                        console.error("Error reconocimiento voz:", err);
-                        this.detenerDictado();
-                        this.notificar("No se entendió el audio. Reintenta o escribe manual.", true);
-                    };
-
-                    try { rec.start(); } catch(e) { console.error(e); }
-                },
-
-                procesarTextoDictado(texto, campo, tramo) {
-                    let textoTratado = this.palabraANumero(texto);
-                    let valorLimpio = textoTratado;
-
-                    if (campo.startsWith('hE') || campo.startsWith('hS')) {
-                        valorLimpio = this.convertirTextoAHora(textoTratado);
-                        if (!valorLimpio) {
-                            this.notificar(`Hora no válida ("${texto}"). Ejemplo: "07:00"`, true);
-                            this.detenerDictado();
-                            return;
-                        }
-                    } else if (campo.startsWith('km')) {
-                        valorLimpio = textoTratado.replace(/\D/g, '');
-                        if (!valorLimpio) {
-                            this.notificar(`Kilómetros no válidos ("${texto}")`, true);
-                            this.detenerDictado();
-                            return;
-                        }
-                    } else if (campo.startsWith('bus')) {
-                        valorLimpio = textoTratado.replace(/\s+/g, '').toUpperCase();
-                    }
-
-                    this.form[campo] = valorLimpio;
-                    this.calcular();
-                    this.guardarBorrador();
-
-                    const siguiente = this.obtenerSiguienteCampoDictado(campo, tramo);
-                    if (siguiente) {
-                        this.notificar(`Guardado ${this.dictado.nombreCampo}: ${valorLimpio}`);
-                        setTimeout(() => {
-                            this.iniciarEscuchaIndividual(siguiente.campo, siguiente.nombre, tramo);
-                        }, 500);
-                    } else {
-                        this.notificar(`Guardado ${this.dictado.nombreCampo}: ${valorLimpio}`);
-                        this.detenerDictado();
-                    }
-                },
-
-                obtenerSiguienteCampoDictado(campoActual, tramo) {
-                    if (tramo === 1) {
-                        if (campoActual === 'bus1') return { campo: 'hE1', nombre: 'Hora Entrada T1' };
-                        if (campoActual === 'hE1') return { campo: 'hS1', nombre: 'Hora Salida T1' };
-                        if (campoActual === 'hS1') return { campo: 'kmI1', nombre: 'Kilómetros Inicio T1' };
-                        return null;
-                    } else {
-                        if (campoActual === 'bus2') return { campo: 'hE2', nombre: 'Hora Entrada T2' };
-                        if (campoActual === 'hE2') return { campo: 'hS2', nombre: 'Hora Salida T2' };
-                        if (campoActual === 'hS2') return { campo: 'kmI2', nombre: 'Kilómetros Inicio T2' };
-                        return null;
-                    }
-                },
-
-                convertirTextoAHora(texto) {
-                    let normal = texto.toLowerCase().replace(/y/g, '').replace(/de la mañana/g, '').replace(/de la tarde/g, '').trim();
-                    let match = normal.match(/(\d{1,2})[:\s\.\-hms]*(\d{1,2})?/);
-                    if (!match) return null;
-
-                    let h = parseInt(match[1], 10);
-                    let m = match[2] ? parseInt(match[2], 10) : 0;
-
-                    if (isNaN(h) || h < 0 || h > 23) return null;
-                    if (isNaN(m) || m < 0 || m > 59) return null;
-
-                    return `${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}`;
-                },
-
-                detenerDictado() {
-                    if (this.dictado.recognition) {
-                        try { this.dictado.recognition.stop(); } catch(e){}
-                    }
-                    this.dictado.activo = false;
-                    this.dictado.campoActual = '';
-                    this.dictado.nombreCampo = '';
-                    this.dictado.recognition = null;
-                },
-
                 calcNum(n) {
                     if (this.calcDisplay === '0' || this.calcReset) {
                         this.calcDisplay = n;
@@ -1324,8 +1161,7 @@
                 loginGoogle() {
                     if (!esSincronizadoEnNube) return this.notificar("Error de red", true);
                     const provider = new firebase.auth.GoogleAuthProvider();
-                    firebase.auth().signInWithRedirect(provider)
-                        .catch((e) => this.notificar("Error al redirigir: " + e.message, true));
+                    firebase.auth().signInWithRedirect(provider);
                 },
 
                 logout() {
@@ -1441,11 +1277,6 @@
                     this.notificar("¡Borrador asegurado correctamente!", false);
                 },
 
-                comprobarSalidaPreventiva() {
-                    this.detenerDictado();
-                    this.volverAlInicio();
-                },
-
                 updateClock() { 
                     this.timeNow = new Date().toLocaleTimeString('es-ES', { hour12: false }); 
                 },
@@ -1477,20 +1308,18 @@
                 },
 
                 openRegistro(t) {
-                    this.detenerDictado();
-                    this.form = { id: Date.now(), esPartida: (t === 'partida'), bus1: '', hE1: '', hS1: '', kmI1: '', kmF1: '', bus2: '', hE2: '', hS2: '', kmI2: '', kmF2: '', comida: false, cena: false, festivo: false };
+                    this.form = { id: Date.now(), esPartida: (t === 'partida'), bus1: '', hE1: '', hS1: '', kmI1: '', kmF1: '', bus2: '', hE2: '', hS2: '', kmI2: '', kmF2: '', comida: false, cena: false, festivo: false, manualComida: false, manualCena: false };
                     this.manualComida = false;
                     this.manualCena = false;
                     this.screen = 2; this.calcular(); this.actualizarIconos();
                 },
 
                 cargarRegistro(item) {
-                    this.detenerDictado();
                     const d = item.datos || item;
                     this.form = JSON.parse(JSON.stringify(d));
                     this.fechaSeleccionada = item.fecha; 
-                    this.manualComida = false;
-                    this.manualCena = false;
+                    this.manualComida = !!d.manualComida;
+                    this.manualCena = !!d.manualCena;
                     this.screen = 2; this.calcular(); this.actualizarIconos();
                 },
 
@@ -1546,12 +1375,14 @@
                 },
 
                 guardarJornada() {
-                    this.detenerDictado();
                     let advertencias = [];
                     if (!this.form.bus1) advertencias.push("Número de BUS");
                     if (this.form.hS1 && !this.form.hE1) advertencias.push("Hora de inicio tramo 1");
                     if (this.form.esPartida && this.form.hS2 && !this.form.hE2) advertencias.push("Hora de inicio tramo 2");
                     if (this.errorKm) advertencias.push("Consistencia de Kilómetros");
+
+                    this.form.manualComida = this.manualComida;
+                    this.form.manualCena = this.manualCena;
 
                     const reg = {
                         id: this.form.id || Date.now(), 
@@ -1653,7 +1484,9 @@
 
                     let inicioCiclo = new Date(y, m - 1, 16, 0, 0, 0);
                     let finCiclo = new Date(y, m, 15, 23, 59, 59);
-                    this.cicloLabel = `16/${m === 0 ? 12 : m}/${m === 0 ? y-1 : y} al 15/${m+1}/${y}`;
+                    
+                    let fmtF = (d) => `${String(d.getDate()).padStart(2,'0')}/${String(d.getMonth()+1).padStart(2,'0')}/${d.getFullYear()}`;
+                    this.cicloLabel = `${fmtF(inicioCiclo)} al ${fmtF(finCiclo)}`;
 
                     let filtradosCiclo = this.historial.filter(h => {
                         const fReg = this.parseFechaObjeto(h.fecha);
