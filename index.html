@@ -936,13 +936,16 @@
         let refSyncTurnos = null;
         let refSyncPrecios = null;
         
-        const fbConfig = {
-            apiKey: "AIzaSyC7b6_T0ze2HgXiYHfvUeL12JSXE7ZKogc",
-            authDomain: "misturnos-fe3ea.firebaseapp.com",
-            databaseURL: "https://misturnos-fe3ea-default-rtdb.europe-west1.firebasedatabase.app",
-            projectId: "misturnos-fe3ea",
-            storageBucket: "misturnos-fe3ea.appspot.com"
-        };
+       const firebaseConfig = {
+  apiKey: "AIzaSyC7b6_T0ze2HgXiYHfvUeL12JSXE7ZKogc",
+  authDomain: "misturnos-fe3ea.firebaseapp.com",
+  databaseURL: "https://misturnos-fe3ea-default-rtdb.europe-west1.firebasedatabase.app",
+  projectId: "misturnos-fe3ea",
+  storageBucket: "misturnos-fe3ea.firebasestorage.app",
+  messagingSenderId: "1029095925443",
+  appId: "1:1029095925443:web:45177773f7378ac7392476",
+  measurementId: "G-VTVLFEDLPS"
+};
 
         try {
             if (!firebase.apps.length) {
